@@ -20,8 +20,9 @@ if ($modul == 'kelas' && $ac == 'input') {
     $agama = $_POST['agama'];
     $no_telp = $_POST['no_telp'];
     $alamat = $_POST['alamat'];
-    if ($query = mysqli_query($conn, "INSERT INTO tb_guru (id_kelas,nip,nama_guru,tempat_lahir,tanggal_lahir,jenis_kelamin,agama,no_telp,alamat)
-    values ('$id_kelas','$nip','$nama','$tempat_lahir','$tanggal_lahir','$jenis_kelamin','$agama','$no_telp','$alamat')")) {
+    $password = $_POST['nip'];
+    if ($query = mysqli_query($conn, "INSERT INTO tb_guru (id_kelas,nip,nama_guru,tempat_lahir,tanggal_lahir,jenis_kelamin,agama,no_telp,alamat,password)
+    values ('$id_kelas','$nip','$nama','$tempat_lahir','$tanggal_lahir','$jenis_kelamin','$agama','$no_telp','$alamat','$password')")) {
         echo "<script>alert('Berhasil Menambah Data'); window.location.href='../adminweb/index.php?page=guru'; </script>";
     }
 } elseif ($modul == 'siswa' && $ac == 'input') {

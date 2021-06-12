@@ -21,10 +21,8 @@
                                         <div class="col-md-3">
                                             <select class="form-control" name="" id="kelas">
                                                 <option value="">Kelas</option>
-                                                <?php
-                                                $query = mysqli_query($conn, "SELECT * FROM tb_kelas");
-                                                while ($row = mysqli_fetch_array($query)) :
-                                                ?>
+                                                <?php $query = mysqli_query($conn, "SELECT * FROM tb_kelas");
+                                                while ($row = mysqli_fetch_array($query)) : ?>
                                                     <option value="<?php echo $row['id'] ?>"><?php echo $row['nama_kelas'] ?></option>
                                                 <?php endwhile; ?>
                                             </select>

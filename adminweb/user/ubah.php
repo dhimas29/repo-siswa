@@ -22,7 +22,7 @@
                                         <input type="hidden" name="id" value="<?php echo $_GET['id'] ?>">
                                     <?php endif; ?>
                                     <?php if (isset($_GET['id_guru'])) : ?>
-                                        <input type="hidden" name="id" value="<?php echo $_GET['id_guru'] ?>">
+                                        <input type="hidden" name="id_guru" value="<?php echo $_GET['id_guru'] ?>">
                                     <?php endif; ?>
                                     <div class="form-group">
                                         <div class="col-lg-12">

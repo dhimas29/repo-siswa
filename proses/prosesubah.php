@@ -70,12 +70,23 @@ if ($modul == 'kelas' && $ac == 'ubah') {
         echo "<script>alert('Berhasil Mengubah Data'); window.location.href='../adminweb/index.php?page=kriteria'; </script>";
     }
 } elseif ($modul == 'user' && $ac == 'ubah') {
-    $id = $_POST['id'];
+    if (isset($_POST['id'])) {
+        $id = $_POST['id'];
+    } else {
+        $id = $_POST['id_guru'];
+    }
     $nama = $_POST['nama'];
     $username = $_POST['username'];
     $password = $_POST['password'];
-    if ($query = mysqli_query($conn, "UPDATE tb_kriteria set nama_kriteria = '$nama_kriteria', bobot = '$bobot', 
-    sifat = '$sifat' where id = '$id'")) {
-        echo "<script>alert('Berhasil Mengubah Data'); window.location.href='../adminweb/index.php?page=kriteria'; </script>";
+    if (isset($_POST['id'])) {
+        if ($query = mysqli_query($conn, "UPDATE tb_user set username = '$username', nama = '$nama', 
+        password = '$password' where id = '$id'")) {
+            echo "<script>alert('Berhasil Mengubsah Data'); window.location.href='../adminweb/index.php?page=user'; </script>";
+        }
+    } else {
+        if ($query = mysqli_query($conn, "UPDATE tb_guru set nip = '$username', password = '$password', nama_guru ='$nama' 
+        where id_guru = '$id'")) {
+            echo "<script>alert('Berhasil Mengubah Data'); window.location.href='../adminweb/index.php?page=user'; </script>";
+        }
     }
 }
