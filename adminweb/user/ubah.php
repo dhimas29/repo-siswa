@@ -16,9 +16,14 @@
                                 Form Kriteria
                             </div>
                             <div class="card-body">
-                                <form action="../proses/prosesubah.php?module=kriteria&act=ubah" method="post">
+                                <form action="../proses/prosesubah.php?module=user&act=ubah" method="post">
                                     <?php include 'form.php'; ?>
-                                    <input type="hidden" name="id" value="<?php echo $_GET['id'] ?>">
+                                    <?php if (isset($_GET['id'])) : ?>
+                                        <input type="hidden" name="id" value="<?php echo $_GET['id'] ?>">
+                                    <?php endif; ?>
+                                    <?php if (isset($_GET['id_guru'])) : ?>
+                                        <input type="hidden" name="id" value="<?php echo $_GET['id_guru'] ?>">
+                                    <?php endif; ?>
                                     <div class="form-group">
                                         <div class="col-lg-12">
                                             <button type="submit" class="btn btn-md btn-success"><i class="fa fa-save"></i> Simpan</button>

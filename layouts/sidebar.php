@@ -52,7 +52,7 @@
                             </a>
                 </li>
                 <li class="nav-item">
-                    <?php if (($pecah == 'user') || ($pecah == 'siswa') || ($pecah == 'guru') || ($pecah == 'kelas') || ($pecah == 'lowongan')) { ?>
+                    <?php if (($pecah == 'user') || ($pecah == 'kriteria') || ($pecah == 'siswa') || ($pecah == 'guru') || ($pecah == 'kelas') || ($pecah == 'lowongan')) { ?>
                         <a href="#" class="nav-link active">
                             <i class="nav-icon fas fa-chart-pie"></i>
                             <p>
@@ -109,6 +109,19 @@
                                             <i class="nav-icon far fa-circle nav-icon"></i>
                                             <p>
                                                 Manajemen Guru
+                                            </p>
+                                            </a>
+                                </li>
+                                <li class="nav-item">
+                                    <?php if ($pecah == 'kriteria') {
+                                    ?>
+                                        <a href="index.php?page=kriteria" class="nav-link active">
+                                        <?php } else { ?>
+                                            <a href="index.php?page=kriteria" class="nav-link">
+                                            <?php } ?>
+                                            <i class="nav-icon far fa-circle nav-icon"></i>
+                                            <p>
+                                                Manajemen Kriteria
                                             </p>
                                             </a>
                                 </li>

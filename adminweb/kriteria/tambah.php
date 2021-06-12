@@ -18,7 +18,7 @@
                             <div class="card-body">
                                 <form action="../proses/prosestambah.php?module=kriteria&act=input" method="post">
                                     <?php include 'form.php'; ?>
-                                    <div class="row form-group">
+                                    <!-- <div class="row form-group">
                                         <div class="col-lg-3">
                                             <label>SubKriteria</label>
                                         </div>
@@ -30,7 +30,7 @@
                                             </select>
                                         </div>
                                     </div>
-                                    <div id="sub"></div>
+                                    <div id="sub"></div> -->
 
                                     <div class="form-group">
                                         <div class="col-lg-12">

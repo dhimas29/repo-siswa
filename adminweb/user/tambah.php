@@ -1,14 +1,6 @@
         <!-- Page Content -->
-        <div id="page-wrapper">
+        <section class="content">
             <div class="container-fluid">
-                <!-- <div class="row"> -->
-                <!-- <div class="col-lg-12">
-                        <h1 class="page-header">Ubah Data</h1>
-                    </div> -->
-                <!-- /.col-lg-12 -->
-                <!-- </div> -->
-                <!-- /.row -->
-
                 <div class="row">
                     <div class="col-lg-12">
                         <div class="card">
@@ -16,9 +8,8 @@
                                 Form Kriteria
                             </div>
                             <div class="card-body">
-                                <form action="../proses/prosesubah.php?module=kriteria&act=ubah" method="post">
+                                <form action="../proses/prosestambah.php?module=kriteria&act=input" method="post">
                                     <?php include 'form.php'; ?>
-                                    <input type="hidden" name="id" value="<?php echo $_GET['id'] ?>">
                                     <div class="form-group">
                                         <div class="col-lg-12">
                                             <button type="submit" class="btn btn-md btn-success"><i class="fa fa-save"></i> Simpan</button>
@@ -33,5 +24,6 @@
                 </div>
             </div>
             <!-- /.container-fluid -->
-        </div>
+
+        </section>
         <!-- /#page-wrapper -->

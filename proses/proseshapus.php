@@ -20,4 +20,8 @@ if ($modul == 'kelas' and $ac == 'hapus') {
     if (mysqli_query($conn, "DELETE FROM tb_raport WHERE id_siswa='$_GET[id]'")) {
         echo "<script>alert('Berhasil Menghapus Data'); window.location.href='../adminweb/index.php?page=raport'; </script>";
     }
+} elseif ($modul == 'kriteria' and $ac == 'hapus') {
+    if (mysqli_query($conn, "DELETE FROM tb_kriteria WHERE id='$_GET[id]'")) {
+        echo "<script>alert('Berhasil Menghapus Data'); window.location.href='../adminweb/index.php?page=kriteria'; </script>";
+    }
 }

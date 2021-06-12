@@ -71,7 +71,10 @@
                 include 'dashboard.php';
                 break;
             case 'user':
-                include 'user.php';
+                include 'user/index.php';
+                break;
+            case 'user_ubah':
+                include 'user/ubah.php';
                 break;
             case 'siswa':
                 include 'siswa.php';
@@ -87,6 +90,9 @@
                 break;
             case 'kriteria':
                 include 'kriteria/index.php';
+                break;
+            case 'ubah_kriteria':
+                include 'kriteria/ubah.php';
                 break;
             case 'tambah_kriteria':
                 include 'kriteria/tambah.php';
