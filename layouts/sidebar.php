@@ -200,19 +200,21 @@
                                         </p>
                                         </a>
                             </li>
-                            <li class="nav-item">
-                                <?php if ($pecah == 'hasil') {
-                                ?>
-                                    <a href="index.php?page=hasil&tab=nilai_matriks" class="nav-link active">
-                                    <?php } else { ?>
-                                        <a href="index.php?page=hasil&tab=nilai_matriks"" class=" nav-link">
-                                        <?php } ?>
-                                        <i class="nav-icon far fa-circle nav-icon"></i>
-                                        <p>
-                                            Hasil Perhitungan
-                                        </p>
-                                        </a>
-                            </li>
+                            <?php if ($_SESSION['level'] == 'guru') : ?>
+                                <li class="nav-item">
+                                    <?php if ($pecah == 'hasil') {
+                                    ?>
+                                        <a href="index.php?page=hasil&tab=nilai_matriks" class="nav-link active">
+                                        <?php } else { ?>
+                                            <a href="index.php?page=hasil&tab=nilai_matriks" class=" nav-link">
+                                            <?php } ?>
+                                            <i class="nav-icon far fa-circle nav-icon"></i>
+                                            <p>
+                                                Hasil Perhitungan
+                                            </p>
+                                            </a>
+                                </li>
+                            <?php endif; ?>
                             </ul>
                 </li>
                 <!-- <li class="nav-item">

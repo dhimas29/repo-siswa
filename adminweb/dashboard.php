@@ -5,14 +5,16 @@
                 <!-- small box -->
                 <div class="small-box bg-info">
                     <div class="inner">
-                        <h3>150</h3>
-
-                        <p>New Orders</p>
+                        <?php $query = mysqli_query($conn, "SELECT *,count(*) as total FROM tb_siswa");
+                        while ($row = mysqli_fetch_array($query)) { ?>
+                            <h3><?php echo $row['total'] ?></h3>
+                            <p>Jumlah Siswa</p>
+                        <?php } ?>
                     </div>
                     <div class="icon">
                         <i class="ion ion-bag"></i>
                     </div>
-                    <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+                    <a href="index.php?page=siswa" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
                 </div>
             </div>
             <!-- ./col -->
@@ -20,9 +22,11 @@
                 <!-- small box -->
                 <div class="small-box bg-success">
                     <div class="inner">
-                        <h3>53<sup style="font-size: 20px">%</sup></h3>
-
-                        <p>Bounce Rate</p>
+                        <?php $query = mysqli_query($conn, "SELECT *,count(*) as total FROM tb_guru");
+                        while ($row = mysqli_fetch_array($query)) { ?>
+                            <h3><?php echo $row['total'] ?></h3>
+                            <p>Jumlah Guru</p>
+                        <?php } ?>
                     </div>
                     <div class="icon">
                         <i class="ion ion-stats-bars"></i>
@@ -35,9 +39,11 @@
                 <!-- small box -->
                 <div class="small-box bg-warning">
                     <div class="inner">
-                        <h3>44</h3>
-
-                        <p>User Registrations</p>
+                        <?php $query = mysqli_query($conn, "SELECT *,count(*) as total FROM tb_kelas");
+                        while ($row = mysqli_fetch_array($query)) { ?>
+                            <h3><?php echo $row['total'] ?></h3>
+                            <p>Jumlah Kelas</p>
+                        <?php } ?>
                     </div>
                     <div class="icon">
                         <i class="ion ion-person-add"></i>
@@ -50,9 +56,11 @@
                 <!-- small box -->
                 <div class="small-box bg-danger">
                     <div class="inner">
-                        <h3>65</h3>
-
-                        <p>Unique Visitors</p>
+                        <?php $query = mysqli_query($conn, "SELECT *,count(*) as total FROM tb_kriteria");
+                        while ($row = mysqli_fetch_array($query)) { ?>
+                            <h3><?php echo $row['total'] ?></h3>
+                            <p>Jumlah Kriteria</p>
+                        <?php } ?>
                     </div>
                     <div class="icon">
                         <i class="ion ion-pie-graph"></i>
@@ -64,46 +72,7 @@
         </div>
         <!-- /.row -->
         <!-- Main row -->
-        <div class="row">
-            <div class="col-md-6">
-            </div>
-            <div class="col-md-6">
-                <div class="card card-info">
-                    <div class="card-header">
-                        <h3 class="card-title">Nilai Preferensi</h3>
-                    </div>
-                    <div class="card-body">
-                        <!-- Color Picker -->
-                        <table class="table table-bordered">
-                            <thead>
-                                <tr>
-                                    <th style="width: 10px">No</th>
-                                    <th>Nilai</th>
-                                    <th>Keterangan</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <?php
-                                $no = 1;
-                                $query = mysqli_query($conn, "SELECT * FROM tb_nilai");
-                                while ($row = mysqli_fetch_array($query)) {
-                                ?>
-                                    <tr>
-                                        <td><?= $no++; ?></td>
-                                        <td><?= $row['jumlah_nilai']; ?></td>
-                                        <td><?= $row['keterangan_nilai']; ?></td>
-                                    </tr>
-                                <?php } ?>
-                            </tbody>
-                        </table>
-                    </div>
-                    <!-- /.card-body -->
-                </div>
 
-
-                <!-- /.card -->
-            </div>
-        </div>
         <!-- /.row (main row) -->
     </div><!-- /.container-fluid -->
 </section>

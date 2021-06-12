@@ -53,6 +53,8 @@
 
                                 <!-- Change this to a button or input when using this as a form -->
                                 <input type="submit" name="" value="Login" class="btn btn-lg btn-success btn-block">
+                                <a href="login_guru.php" style="float: right;">Login Guru</a>
+                                <a href="index.php">Kembali</a>
                             </fieldset>
                         </form>
                     </div>

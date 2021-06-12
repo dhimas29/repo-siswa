@@ -22,6 +22,7 @@
                 $p      = new PagingKriteria();
                 $batas  = 5;
                 $posisi = $p->cariPosisi($batas);
+
                 $tampil = mysqli_query($conn, "SELECT *,tb_matrik.nilai as skor FROM tb_raport 
                                             left join tb_siswa on tb_siswa.id = tb_raport.id_siswa
                                             left join tb_matrik on tb_matrik.id_siswa = tb_raport.id_siswa
