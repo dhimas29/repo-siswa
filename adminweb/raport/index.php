@@ -39,13 +39,34 @@
                                             $p      = new PagingKriteria();
                                             $batas  = 5;
                                             $posisi = $p->cariPosisi($batas);
-                                            $tampil = mysqli_query($conn, "SELECT *,tb_matrik.nilai as skor FROM tb_raport 
+                                            if (isset($_GET['kelas'])) {
+                                                $tampil = mysqli_query($conn, "SELECT *,tb_matrik.nilai as skor FROM tb_raport 
+                                            left join tb_siswa on tb_siswa.id = tb_raport.id_siswa
+                                            left join tb_matrik on tb_matrik.id_siswa = tb_raport.id_siswa
+                                            join tb_guru on tb_siswa.id_kelas = tb_guru.id_kelas
+                                            where tb_siswa.id_kelas = '$_GET[kelas]'
+                                            group by tb_raport.id_siswa
+                                            order by tb_raport.id_siswa asc 
+                                            limit $posisi,$batas");
+                                            } else if ($_SESSION['level'] == 'guru') {
+                                                $tampil = mysqli_query($conn, "SELECT *,tb_matrik.nilai as skor FROM tb_raport 
+                                            left join tb_siswa on tb_siswa.id = tb_raport.id_siswa
+                                            left join tb_matrik on tb_matrik.id_siswa = tb_raport.id_siswa
+                                            join tb_guru on tb_siswa.id_kelas = tb_guru.id_kelas
+                                            where tb_siswa.id_kelas = '$_SESSION[id_kelas]'
+                                            group by tb_raport.id_siswa
+                                            order by tb_raport.id_siswa asc 
+                                            limit $posisi,$batas");
+                                            } else {
+                                                $tampil = mysqli_query($conn, "SELECT *,tb_matrik.nilai as skor FROM tb_raport 
                                             left join tb_siswa on tb_siswa.id = tb_raport.id_siswa
                                             left join tb_matrik on tb_matrik.id_siswa = tb_raport.id_siswa
                                             join tb_guru on tb_siswa.id_kelas = tb_guru.id_kelas
                                             group by tb_raport.id_siswa
                                             order by tb_raport.id_siswa asc 
                                             limit $posisi,$batas");
+                                            }
+
                                             $no = $posisi + 1;
                                             while ($row = mysqli_fetch_array($tampil)) { ?>
                                                 <tr>
