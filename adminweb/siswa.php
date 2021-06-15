@@ -39,7 +39,7 @@
                                         </thead>
                                         <tbody>
                                             <?php
-                                            $p      = new PagingKriteria();
+                                            $p      = new PagingSiswa();
                                             $batas  = 5;
                                             $posisi = $p->cariPosisi($batas);
                                             if ($_SESSION['level'] == 'guru') {
@@ -64,8 +64,8 @@
                                                     <td><?php echo $row['jenis_kelamin']; ?></td>
                                                     <td><?php echo $row['alamat']; ?></td>
                                                     <?php if ($_SESSION['level'] == 'admin') : ?>
-                                                        <td><a href="" data-bs-toggle="modal" data-bs-target="#modalubah<?= $row['id_siswa']; ?>" class="btn btn-sm btn-warning btn-block">Ubah</a></td>
-                                                        <td><a href="" data-bs-toggle="modal" data-bs-target="#modalhapus<?= $row['id_siswa']; ?>" class="btn btn-sm btn-danger btn-block">Hapus</a></td>
+                                                        <td><a href="" data-bs-toggle="modal" data-bs-target="#modalubah<?= $row['id_siswa']; ?>" class="btn btn-sm btn-warning btn-block"><i class="fas fa-edit"></i></a></td>
+                                                        <td><a href="" data-bs-toggle="modal" data-bs-target="#modalhapus<?= $row['id_siswa']; ?>" class="btn btn-sm btn-danger btn-block"><i class="fas fa-times"></i></a></td>
                                                     <?php endif; ?>
                                                 </tr>
                                                 <!-- Modal Haus -->
@@ -179,12 +179,6 @@
                                                                                 <div class="col-sm-8">
                                                                                     <textarea name="alamat" id="alamat" placeholder="Alamat" class="form-control"><?php echo $rows['alamat']; ?></textarea>
                                                                                     <!-- <input type="date" class="form-control" id="alamat" placeholder="Alamat" name="alamat"> -->
-                                                                                </div>
-                                                                            </div>
-                                                                            <div class="form-group row">
-                                                                                <label for="tahun_angkatan" class="col-sm-4 col-form-label">Tahun Angkatan</label>
-                                                                                <div class="col-sm-8">
-                                                                                    <input type="number" class="form-control" value="<?php echo $rows['tahun_angkatan']; ?>" id="tahun_angkatan" placeholder="Tahun Angkatan" name="tahun_angkatan">
                                                                                 </div>
                                                                             </div>
                                                                         </div>
@@ -347,12 +341,6 @@
                             <div class="col-sm-8">
                                 <textarea name="alamat" id="alamat" placeholder="Alamat" class="form-control"></textarea>
                                 <!-- <input type="date" class="form-control" id="alamat" placeholder="Alamat" name="alamat"> -->
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <label for="tahun_angkatan" class="col-sm-4 col-form-label">Tahun Angkatan</label>
-                            <div class="col-sm-8">
-                                <input type="number" class="form-control" id="tahun_angkatan" placeholder="Tahun Angkatan" name="tahun_angkatan">
                             </div>
                         </div>
                     </div>

@@ -38,8 +38,9 @@
         <div class="row">
             <div class="col-md-4 col-md-offset-4">
                 <div class="login-panel panel panel-default">
+                    <img src="asset/img/logo_sd.png" style="width: 30%;display: block;margin-left: auto;margin-right: auto;" alt="">
                     <div class="panel-heading">
-                        <h3 class="panel-title">Silahkan Login Guru</h3>
+                        <h3 class="panel-title" style="text-align: center;">Silahkan Login Guru</h3>
                     </div>
                     <div class="panel-body">
                         <form action="proses_login_guru.php" method="post">

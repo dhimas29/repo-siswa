@@ -14,7 +14,7 @@ $hasil = mysqli_query($conn, $query);
 if (mysqli_num_rows($hasil) > 0) {
     $data = mysqli_fetch_assoc($hasil);
     $_SESSION['login'] = true;
-    $_SESSION['id'] = $data['id'];
+    $_SESSION['id_guru'] = $data['id'];
     $_SESSION['nip'] = $data['nip'];
     $_SESSION['password'] = $data['password'];
     $_SESSION['nama_guru'] = $data['nama_guru'];

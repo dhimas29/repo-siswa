@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 12, 2021 at 05:11 AM
+-- Generation Time: Jun 15, 2021 at 01:19 PM
 -- Server version: 10.4.18-MariaDB
 -- PHP Version: 7.4.16
 
@@ -58,8 +58,7 @@ CREATE TABLE `tb_guru` (
 --
 
 INSERT INTO `tb_guru` (`id_guru`, `id_kelas`, `nip`, `nama_guru`, `tempat_lahir`, `tanggal_lahir`, `jenis_kelamin`, `agama`, `no_telp`, `alamat`, `password`) VALUES
-(3, 2, '123123', 'Guru', 'Jakarta', '2021-04-14', 'laki', 'kristen', '123123', 'Bekasi', '123123'),
-(4, 3, '1111', 'Sayap', 'Jakarta', '2017-01-30', 'perempuan', 'islam', '0812312', 'Jakarta', '1111'),
+(3, 3, '123123', 'Guru', 'Jakarta', '2021-04-14', 'perempuan', 'kristen', '123123', 'Bekasi', '123123'),
 (5, 2, '10', 'Oneng', 'Bekasi', '2006-05-10', 'laki', 'islam', '075675467', 'Bekasi', '10');
 
 -- --------------------------------------------------------
@@ -150,16 +149,36 @@ CREATE TABLE `tb_matrik` (
 --
 
 INSERT INTO `tb_matrik` (`id`, `id_kriteria`, `id_siswa`, `nilai`, `bobot_matrik`) VALUES
-(35, 1, 2, 1.6667, 2.297),
-(36, 1, 3, 3.2222, 4.441),
-(37, 2, 2, 3, 1.87),
-(38, 3, 2, 4, 1.262),
-(39, 4, 2, 2, 0.595),
-(40, 5, 2, 2, 0.565),
-(41, 2, 3, 1, 0.623),
-(42, 3, 3, 1, 0.316),
-(43, 4, 3, 1, 0.298),
-(44, 5, 3, 1, 0.282);
+(35, 1, 2, 30, 1.234),
+(36, 1, 3, 22.2222, 0.914),
+(37, 2, 2, 90, 1.473),
+(38, 3, 2, 90, 0.786),
+(39, 4, 2, 90, 0.675),
+(40, 5, 2, 90, 0.6),
+(41, 2, 3, 10, 0.164),
+(42, 3, 3, 10, 0.087),
+(43, 4, 3, 10, 0.075),
+(44, 5, 3, 10, 0.067),
+(45, 1, 5, 70, 2.879),
+(49, 1, 6, 48.8889, 2.01),
+(50, 1, 7, 50, 2.056),
+(52, 2, 5, 80, 1.31),
+(53, 3, 5, 80, 0.699),
+(54, 4, 5, 80, 0.6),
+(55, 5, 5, 80, 0.533),
+(56, 2, 7, 10, 0.164),
+(57, 3, 7, 10, 0.087),
+(58, 4, 7, 10, 0.075),
+(59, 5, 7, 10, 0.067),
+(60, 2, 6, 40, 0.655),
+(61, 3, 6, 40, 0.35),
+(62, 4, 6, 40, 0.3),
+(63, 5, 6, 40, 0.267),
+(64, 1, 8, 60, 2.467),
+(65, 2, 8, 50, 0.819),
+(66, 3, 8, 50, 0.437),
+(67, 4, 8, 50, 0.375),
+(68, 5, 8, 50, 0.333);
 
 -- --------------------------------------------------------
 
@@ -178,8 +197,12 @@ CREATE TABLE `tb_preferensi` (
 --
 
 INSERT INTO `tb_preferensi` (`id`, `id_siswa`, `nilai`) VALUES
-(1, 2, 0.062875884717703),
-(2, 3, 0.3629);
+(1, 2, 0.5214),
+(2, 3, 0.5026),
+(3, 5, 0.5214),
+(4, 7, 0.5214),
+(5, 6, 0.5214),
+(6, 8, 0.5214);
 
 -- --------------------------------------------------------
 
@@ -199,24 +222,69 @@ CREATE TABLE `tb_raport` (
 --
 
 INSERT INTO `tb_raport` (`id`, `id_siswa`, `id_mapel`, `nilai`) VALUES
-(100, 3, 1, 4),
-(101, 3, 2, 5),
-(102, 3, 3, 5),
-(103, 3, 4, 2),
-(104, 3, 5, 2),
-(105, 3, 6, 1),
-(106, 3, 7, 4),
-(107, 3, 8, 3),
-(108, 3, 9, 3),
-(109, 2, 1, 1),
-(110, 2, 2, 1),
-(111, 2, 3, 1),
-(112, 2, 4, 1),
-(113, 2, 5, 2),
-(114, 2, 6, 1),
-(115, 2, 7, 5),
-(116, 2, 8, 1),
-(117, 2, 9, 2);
+(100, 3, 1, 20),
+(101, 3, 2, 20),
+(102, 3, 3, 20),
+(103, 3, 4, 20),
+(104, 3, 5, 20),
+(105, 3, 6, 20),
+(106, 3, 7, 20),
+(107, 3, 8, 40),
+(108, 3, 9, 20),
+(109, 2, 1, 30),
+(110, 2, 2, 30),
+(111, 2, 3, 30),
+(112, 2, 4, 30),
+(113, 2, 5, 30),
+(114, 2, 6, 30),
+(115, 2, 7, 30),
+(116, 2, 8, 30),
+(117, 2, 9, 30),
+(118, 5, 1, 70),
+(119, 5, 2, 70),
+(120, 5, 3, 70),
+(121, 5, 4, 70),
+(122, 5, 5, 70),
+(123, 5, 6, 70),
+(124, 5, 7, 70),
+(125, 5, 8, 70),
+(126, 5, 9, 70),
+(127, 0, 1, 50),
+(128, 0, 2, 50),
+(129, 0, 3, 50),
+(130, 0, 4, 50),
+(131, 0, 5, 50),
+(132, 0, 6, 50),
+(133, 0, 7, 50),
+(134, 0, 8, 50),
+(135, 0, 9, 50),
+(145, 6, 1, 50),
+(146, 6, 2, 50),
+(147, 6, 3, 50),
+(148, 6, 4, 50),
+(149, 6, 5, 50),
+(150, 6, 6, 50),
+(151, 6, 7, 50),
+(152, 6, 8, 50),
+(153, 6, 9, 40),
+(154, 7, 1, 50),
+(155, 7, 2, 50),
+(156, 7, 3, 50),
+(157, 7, 4, 50),
+(158, 7, 5, 50),
+(159, 7, 6, 50),
+(160, 7, 7, 50),
+(161, 7, 8, 50),
+(162, 7, 9, 50),
+(163, 8, 1, 80),
+(164, 8, 2, 70),
+(165, 8, 3, 70),
+(166, 8, 4, 40),
+(167, 8, 5, 70),
+(168, 8, 6, 60),
+(169, 8, 7, 50),
+(170, 8, 8, 50),
+(171, 8, 9, 50);
 
 -- --------------------------------------------------------
 
@@ -233,17 +301,21 @@ CREATE TABLE `tb_siswa` (
   `tanggal_lahir` varchar(10) NOT NULL,
   `jenis_kelamin` varchar(10) NOT NULL,
   `agama` varchar(30) NOT NULL,
-  `alamat` varchar(100) NOT NULL,
-  `tahun_angkatan` varchar(4) NOT NULL
+  `alamat` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `tb_siswa`
 --
 
-INSERT INTO `tb_siswa` (`id`, `id_kelas`, `nis`, `nama`, `tempat_lahir`, `tanggal_lahir`, `jenis_kelamin`, `agama`, `alamat`, `tahun_angkatan`) VALUES
-(2, 2, '13123', 'Dhimas', 'Tangerang', '2021-04-15', 'laki', 'islam', 'Bekasi', '2010'),
-(3, 2, '12301', 'Dhim', 'Jakarta', '2021-04-08', 'laki', 'kristen', 'Bekasi', '2000');
+INSERT INTO `tb_siswa` (`id`, `id_kelas`, `nis`, `nama`, `tempat_lahir`, `tanggal_lahir`, `jenis_kelamin`, `agama`, `alamat`) VALUES
+(2, 2, '13123', 'Dhimas', 'Tangerang', '2021-04-15', 'laki', 'islam', 'Bekasi'),
+(3, 2, '12301', 'Dhim', 'Jakarta', '2021-04-08', 'laki', 'kristen', 'Bekasi'),
+(5, 2, '12312', 'Baju', 'Tangerang', '2021-06-01', 'laki', 'islam', 'Bandung'),
+(6, 2, '22222', 'Bujang', 'Bandung', '2021-05-30', 'laki', 'islam', 'Bekasi'),
+(7, 2, '33333', 'Saya', 'Tangerang', '2021-05-30', 'laki', 'islam', 'Jakarta'),
+(8, 2, '4444', 'Barus', 'Bekasi', '1998-01-20', 'perempuan', 'islam', 'Bandung'),
+(9, 3, '55555', 'Agus', 'Jakarta', '2021-06-06', 'laki', 'islam', 'Bandung');
 
 -- --------------------------------------------------------
 
@@ -384,7 +456,7 @@ ALTER TABLE `tb_kelas`
 -- AUTO_INCREMENT for table `tb_kriteria`
 --
 ALTER TABLE `tb_kriteria`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `tb_mapel`
@@ -396,25 +468,25 @@ ALTER TABLE `tb_mapel`
 -- AUTO_INCREMENT for table `tb_matrik`
 --
 ALTER TABLE `tb_matrik`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=45;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=69;
 
 --
 -- AUTO_INCREMENT for table `tb_preferensi`
 --
 ALTER TABLE `tb_preferensi`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `tb_raport`
 --
 ALTER TABLE `tb_raport`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=118;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=172;
 
 --
 -- AUTO_INCREMENT for table `tb_siswa`
 --
 ALTER TABLE `tb_siswa`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `tb_tes`

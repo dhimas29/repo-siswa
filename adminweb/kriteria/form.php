@@ -3,13 +3,15 @@
         <label>Nama</label>
     </div>
     <div class="col-lg-9">
-        <?php $query = mysqli_query($conn, "SELECT * FROM tb_kriteria where id='$_GET[id]'");
+        <?php 
+        if(isset($_GET['id'])){
+        $query = mysqli_query($conn, "SELECT * FROM tb_kriteria where id='$_GET[id]'");
         while ($row = mysqli_fetch_array($query)) {
             $id_kriteria = $row['id'];
             $nama_kriteria = $row['nama_kriteria'];
             $bobot = $row['bobot'];
             $sifat = $row['sifat'];
-        } ?>
+        }} ?>
         <input class="form-control" type="text" name="nama_kriteria" placeholder="Nama" required="" value="<?php if (isset($id_kriteria)) echo $nama_kriteria; ?>">
     </div>
 </div>

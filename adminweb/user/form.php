@@ -2,17 +2,18 @@
 if (isset($_GET['id'])) {
     $query = mysqli_query($conn, "SELECT * FROM tb_user where id='$_GET[id]'");
     while ($row = mysqli_fetch_array($query)) {
-        $username = $row['username'];
+        $user = $row['username'];
         $password = $row['password'];
         $nama = $row['nama'];
     }
-} else {
+} else if(isset($_GET['id_guru'])) {
     $query = mysqli_query($conn, "SELECT * FROM tb_guru where id_guru ='$_GET[id_guru]'");
     while ($row = mysqli_fetch_array($query)) {
-        $username = $row['nip'];
+        $user = $row['nip'];
         $nama = $row['nama_guru'];
         $password = $row['password'];
     }
+} else{
 }
 ?>
 <div class="row form-group">
@@ -28,7 +29,7 @@ if (isset($_GET['id'])) {
         <label>Username</label>
     </div>
     <div class="col-lg-9">
-        <input class="form-control" type="text" name="username" placeholder="Nama" required="" value="<?php if (isset($username)) echo $username; ?>">
+        <input class="form-control" type="text" name="username" placeholder="Username" required="" value="<?php if (isset($user)) echo $user; ?>">
     </div>
 </div>
 <div class="row form-group">
@@ -36,6 +37,7 @@ if (isset($_GET['id'])) {
         <label>Password</label>
     </div>
     <div class="col-lg-9">
-        <input class="form-control" type="password" name="password" placeholder="Nama" required="" value="<?php if (isset($password)) echo $password; ?>">
+        <input class="form-control" type="password" name="password" placeholder="Password" required="" value="<?php if (isset($password)) echo $password; ?>">
     </div>
 </div>
+

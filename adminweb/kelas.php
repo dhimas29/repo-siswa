@@ -32,13 +32,11 @@
                                         </thead>
                                         <tbody>
                                             <?php
-                                            $p      = new PagingKriteria();
+                                            $p      = new PagingKelas();
                                             $batas  = 5;
                                             $posisi = $p->cariPosisi($batas);
-                                            $tampil = mysqli_query($conn, "SELECT *,tb_guru.nama_guru as walikelas,
-                                            count(tb_siswa.id) as jml FROM tb_kelas 
+                                            $tampil = mysqli_query($conn, "SELECT *,tb_guru.nama_guru as walikelas FROM tb_kelas 
                                             left join tb_guru on tb_guru.id_kelas = tb_kelas.id
-                                            left join tb_siswa on tb_siswa.id_kelas = tb_kelas.id
                                             order by tb_kelas.id asc limit $posisi,$batas");
                                             $no = $posisi + 1;
                                             while ($row = mysqli_fetch_array($tampil)) { ?>
@@ -50,9 +48,12 @@
                                                     <?php } else { ?>
                                                         <td>-</td>
                                                     <?php } ?>
-                                                    <td><?php echo $row['jml']; ?></td>
-                                                    <td><a href="" data-bs-toggle="modal" data-bs-target="#modalubah<?= $row['id']; ?>" class="btn btn-sm btn-warning btn-block">Ubah</a></td>
-                                                    <td><a href="" data-bs-toggle="modal" data-bs-target="#modalhapus<?= $row['id']; ?>" class="btn btn-sm btn-danger btn-block">Hapus</a></td>
+                                                    <td><?php 
+                                                    $query = mysqli_query($conn, "SELECT count(*) as jml from tb_siswa where id_kelas ='$row[id_kelas]'");
+                                                    $jml = mysqli_fetch_array($query);
+                                                    echo $jml['jml']; ?></td>
+                                                    <td><a href="" data-bs-toggle="modal" data-bs-target="#modalubah<?= $row['id']; ?>" class="btn btn-sm btn-warning btn-block"><i class="fas fa-edit"></i></a></td>
+                                                    <td><a href="" data-bs-toggle="modal" data-bs-target="#modalhapus<?= $row['id']; ?>" class="btn btn-sm btn-danger btn-block"><i class="fas fa-times"></i></a></td>
                                                 </tr>
                                                 <!-- Modal Ubah -->
                                                 <div class="modal fade" id="modalubah<?= $row['id']; ?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">

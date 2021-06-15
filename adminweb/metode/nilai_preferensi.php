@@ -6,9 +6,9 @@ left join tb_matrik on tb_matrik.id_siswa = tb_raport.id_siswa
 left join tb_kriteria on tb_matrik.id_kriteria = tb_kriteria.id
 join tb_guru on tb_siswa.id_kelas = tb_guru.id_kelas
 where tb_siswa.id_kelas = '$_SESSION[id_kelas]'
-                group by tb_siswa.id
-                order by tb_matrik.nilai desc 
-                limit 10");
+group by tb_siswa.id
+order by tb_matrik.nilai desc 
+limit 5");
 $no = 1;
 while ($row = mysqli_fetch_array($tampil)) {
     $mak2 = 0;
@@ -39,7 +39,7 @@ while ($row = mysqli_fetch_array($tampil)) {
     $cek = mysqli_query($conn, "SELECT * FROM tb_preferensi where id_siswa='$row[id_siswa]'");
     $num = mysqli_num_rows($cek);
     if ($num > 0) {
-        $update = mysqli_query($conn, "UPDATE tb_preferensi set nilai ='$result' where id='$row[id_siswa]'");
+        $update = mysqli_query($conn, "UPDATE tb_preferensi set nilai ='$result' where id_siswa='$row[id_siswa]'");
     } else {
         $insert = mysqli_query($conn, "INSERT INTO tb_preferensi (id_siswa,nilai)values('$row[id_siswa]','$result')");
     }
@@ -48,6 +48,7 @@ while ($row = mysqli_fetch_array($tampil)) {
 <div class="card-body">
     <div class="col-sm-12">
         <table id="example2" class="table table-bordered table-hover dataTable dtr-inline collapsed" role="grid" aria-describedby="example2_info">
+            <a href="" class="btn btn-primary btn-sm float-right">Cetak</a>
             <div class="table-header">Nilai Preferensi</div>
             <thead>
                 <tr role="row">
@@ -61,14 +62,13 @@ while ($row = mysqli_fetch_array($tampil)) {
             <tbody>
                 <?php
                 $p      = new PagingIdealPositif();
-                $batas  = 5;
+                $batas  = 2;
                 $posisi = $p->cariPosisi($batas);
                 $tampils = mysqli_query($conn, "SELECT * from tb_preferensi 
                 join tb_siswa on tb_siswa.id = tb_preferensi.id_siswa
                 join tb_guru on tb_siswa.id_kelas = tb_guru.id_kelas
                 order by nilai desc
-                limit 3");
-                $mak2 = 0;
+                limit 2");
                 $no = 1;
                 while ($rs = mysqli_fetch_array($tampils)) { ?>
                     <tr>

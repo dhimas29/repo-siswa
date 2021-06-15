@@ -7,7 +7,7 @@
                 <div class="card">
                     <div class="card-header">
                         <h2 class="card-title">Data Siswa</h2>
-                        <a href="index.php?page=tambah_nilai" class="btn btn-sm btn-primary float-right">Tambah Data</a>
+                        <!-- <a href="index.php?page=tambah_nilai" class="btn btn-sm btn-primary float-right">Tambah Data</a> -->
                     </div>
                     <!-- /.card-header -->
                     <div class="card-body">
@@ -42,23 +42,21 @@
                                                 while ($row = mysqli_fetch_array($query)) : ?>
                                                     <th rowspan="1" colspan="1"><?php echo $row['nama_kriteria'] ?></th>
                                                 <?php endwhile; ?>
-                                                <th colspan="2">
-                                                    <center>Aksi</center>
-                                                </th>
+                                                <th colspan="2" style="text-align:center;">Aksi</th>
                                             </tr>
                                         </thead>
                                         <tbody>
                                             <?php
-                                            $p      = new PagingKriteria();
+                                            $p      = new PagingNilai();
                                             $batas  = 5;
                                             $posisi = $p->cariPosisi($batas);
-                                            if (isset($_GET['kelas'])) {
+                                            if (isset($_GET['id'])) {
                                                 $tampil = mysqli_query($conn, "SELECT * FROM tb_matrik 
                                             left join tb_siswa on tb_siswa.id = tb_matrik.id_siswa
-                                            where tb_siswa.id_kelas = '$_GET[kelas]' 
-                                            group by id_siswa
+                                            where tb_siswa.id_kelas = '$_GET[id]' 
+                                            group by id_siswa 
                                             order by id_siswa asc 
-                                            limit $posisi,$batas");
+                                            limit 5");
                                             } else if ($_SESSION['level'] == 'guru') {
                                                 $tampil = mysqli_query($conn, "SELECT * FROM tb_matrik 
                                             join tb_siswa on tb_siswa.id = tb_matrik.id_siswa
@@ -66,13 +64,13 @@
                                             where tb_siswa.id_kelas = '$_SESSION[id_kelas]'
                                             group by id_siswa
                                             order by nilai desc 
-                                            limit 10");
+                                            limit 5");
                                             } else {
                                                 $tampil = mysqli_query($conn, "SELECT * FROM tb_matrik 
                                             left join tb_siswa on tb_siswa.id = tb_matrik.id_siswa
                                             group by id_siswa
                                             order by id_siswa asc 
-                                            limit $posisi,$batas");
+                                            limit 5");
                                             }
                                             $no = $posisi + 1;
                                             while ($row = mysqli_fetch_array($tampil)) { ?>
@@ -80,26 +78,50 @@
                                                     <td><?php echo $no ?></td>
                                                     <td><?php echo $row['nis']; ?></td>
                                                     <td><?php echo $row['nama']; ?></td>
-                                                    <?php $query = mysqli_query($conn, "SELECT * FROM tb_kriteria");
+                                                    <?php $query = mysqli_query($conn, "SELECT * FROM tb_kriteria order by id asc");
                                                     while ($nilai = mysqli_fetch_array($query)) : ?>
-                                                        <?php $quer = mysqli_query($conn, "SELECT * FROM tb_matrik where id_kriteria ='$nilai[id]' and id_siswa ='$row[id_siswa]'");
+                                                        <?php $quer = mysqli_query($conn, "SELECT * FROM tb_matrik 
+                                                        where id_kriteria ='$nilai[id]' 
+                                                        and id_siswa ='$row[id_siswa]'
+                                                        order by id_kriteria asc");
                                                         while ($nilaicek = mysqli_fetch_array($quer)) : ?>
-                                                            <?php if (isset($nilaicek)) { ?>
-                                                                <td><?php echo round($nilaicek['nilai'], 2) ?></td>
+                                                            <?php if ($nilaicek['nilai'] == 0) { ?>
+                                                                <td><?php echo "-"; ?></td>
                                                             <?php } else { ?>
-                                                                <td>-</td>
+                                                                <td><?php echo round($nilaicek['nilai'], 2); ?></td>
                                                             <?php } ?>
                                                         <?php endwhile; ?>
                                                     <?php endwhile; ?>
-                                                    <td><a href="index.php?page=ubah_raport&id=<?php echo $row['id_siswa']; ?>" class="btn btn-sm btn-warning btn-block">Ubah</a></td>
-                                                    <td><a href="../proses/proseshapus.php?module=nilai&act=hapus&id=<?php echo $row['id_siswa'] ?>" class="btn btn-sm btn-danger btn-block" title="Hapus" onclick="return confirm('Apakah anda yakin ingin menghapus data raport <?php echo $row['nama'] ?>?')">Hapus</a></td>
+                                                    <td><a href="index.php?page=ubah_nilai&id=<?php echo $row['id_siswa']; ?>" class="btn btn-sm btn-warning btn-block"><i class="fas fa-edit"></i></a></td>
+                                                    <td><a href="../proses/proseshapus.php?module=nilai&act=hapus&id=<?php echo $row['id_siswa'] ?>" class="btn btn-sm btn-danger btn-block" title="Hapus" onclick="return confirm('Apakah anda yakin ingin menghapus data raport <?php echo $row['nama'] ?>?')"><i class="fas fa-times"></i></a></td>
 
                                                 </tr>
 
                                             <?php
                                                 $no++;
                                             }
-                                            $jmldata = mysqli_num_rows(mysqli_query($conn, "SELECT * FROM tb_siswa"));
+                                            if (isset($_GET['id'])) {
+                                                $dts = mysqli_query($conn, "SELECT * FROM tb_matrik 
+                                            left join tb_siswa on tb_siswa.id = tb_matrik.id_siswa
+                                            where tb_siswa.id_kelas = '$_GET[id]' 
+                                            group by id_siswa
+                                            order by id_siswa asc ");
+                                            } else if ($_SESSION['level'] == 'guru') {
+                                                $dts = mysqli_query($conn, "SELECT * FROM tb_matrik 
+                                            join tb_siswa on tb_siswa.id = tb_matrik.id_siswa
+                                            join tb_guru on tb_siswa.id_kelas = tb_guru.id_kelas
+                                            where tb_siswa.id_kelas = '$_SESSION[id_kelas]'
+                                            group by id_siswa
+                                            order by nilai desc limit 5
+                                            ");
+                                            } else {
+                                                $dts = mysqli_query($conn, "SELECT * FROM tb_matrik 
+                                            left join tb_siswa on tb_siswa.id = tb_matrik.id_siswa
+                                            group by id_siswa
+                                            order by id_siswa asc 
+                                            ");
+                                            }
+                                            $jmldata = mysqli_num_rows($dts);
                                             $jmlhalaman  = $p->jumlahHalaman($jmldata, $batas);
                                             $linkHalaman = $p->navHalaman($_GET['halaman'], $jmlhalaman);
                                             ?>

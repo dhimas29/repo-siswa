@@ -24,6 +24,8 @@ if ($modul == 'kelas' && $ac == 'input') {
     if ($query = mysqli_query($conn, "INSERT INTO tb_guru (id_kelas,nip,nama_guru,tempat_lahir,tanggal_lahir,jenis_kelamin,agama,no_telp,alamat,password)
     values ('$id_kelas','$nip','$nama','$tempat_lahir','$tanggal_lahir','$jenis_kelamin','$agama','$no_telp','$alamat','$password')")) {
         echo "<script>alert('Berhasil Menambah Data'); window.location.href='../adminweb/index.php?page=guru'; </script>";
+    } else {
+        echo "<script>alert('Gagal Menambah Data'); window.location.href='../adminweb/index.php?page=guru'; </script>";
     }
 } elseif ($modul == 'siswa' && $ac == 'input') {
     $nis = $_POST['nis'];
@@ -33,11 +35,23 @@ if ($modul == 'kelas' && $ac == 'input') {
     $jenis_kelamin = $_POST['jenis_kelamin'];
     $agama = $_POST['agama'];
     $alamat = $_POST['alamat'];
-    $tahun_angkatan = $_POST['tahun_angkatan'];
     $id_kelas = $_POST['id_kelas'];
-    if ($query = mysqli_query($conn, "INSERT INTO tb_siswa (id_kelas,nis,nama,tempat_lahir,tanggal_lahir,jenis_kelamin,agama,alamat,tahun_angkatan)
-    values ('$id_kelas','$nis','$nama','$tempat_lahir','$tanggal_lahir','$jenis_kelamin','$agama','$alamat','$tahun_angkatan')")) {
+    if ($query = mysqli_query($conn, "INSERT INTO tb_siswa (id_kelas,nis,nama,tempat_lahir,tanggal_lahir,jenis_kelamin,agama,alamat)
+    values ('$id_kelas','$nis','$nama','$tempat_lahir','$tanggal_lahir','$jenis_kelamin','$agama','$alamat')")) {
         echo "<script>alert('Berhasil Menambah Data'); window.location.href='../adminweb/index.php?page=siswa'; </script>";
+    } else {
+        echo "<script>alert('Gagal Menambah Data'); window.location.href='../adminweb/index.php?page=siswa'; </script>";
+    }
+} elseif ($modul == 'user' && $ac == 'input') {
+    $username = $_POST['username'];
+    $nama = $_POST['nama'];
+    $password = $_POST['password'];
+    $level = $_POST['level'];
+    if ($query = mysqli_query($conn, "INSERT INTO tb_user (username,password,level,nama)
+    values ('$username','$password','$level','$nama')")) {
+        echo "<script>alert('Berhasil Menambah Data'); window.location.href='../adminweb/index.php?page=user'; </script>";
+    } else {
+        echo "<script>alert('Gagal Menambah Data'); window.location.href='../adminweb/index.php?page=user'; </script>";
     }
 } elseif ($modul == 'kriteria' && $ac == 'input') {
     $nama_kriteria = $_POST['nama_kriteria'];
@@ -46,6 +60,8 @@ if ($modul == 'kelas' && $ac == 'input') {
     if ($query = mysqli_query($conn, "INSERT INTO tb_kriteria (nama_kriteria,sifat,bobot)
     values ('$nama_kriteria','$jenis','$bobot')")) {
         echo "<script>alert('Berhasil Menambah Data'); window.location.href='../adminweb/index.php?page=kriteria'; </script>";
+    } else {
+        echo "<script>alert('Gagal Menambah Data'); window.location.href='../adminweb/index.php?page=kriteria'; </script>";
     }
 } elseif ($modul == 'raport' && $ac == 'input') {
 
@@ -62,30 +78,45 @@ if ($modul == 'kelas' && $ac == 'input') {
             // echo "<script>alert('Berhasil Menambah Data'); window.location.href='../adminweb/index.php?page=raport'; </script>";
         }
     }
-    $sum = mysqli_query($conn, "SELECT avg(nilai) as skor FROM tb_raport group by id_siswa");
+    $sum = mysqli_query($conn, "SELECT avg(nilai) as skor FROM tb_raport where id_siswa ='$_POST[id_siswa]' group by id_siswa");
     $row_sum = mysqli_fetch_array($sum);
-
+    // var_dump($_POST['id_siswa']);
     $cek_sum = mysqli_num_rows(mysqli_query($conn, "SELECT * FROM tb_matrik where id_siswa = '$_POST[id_siswa]' and id_kriteria ='$_POST[raport]'"));
     if ($cek_sum > 0) {
-        $edit = mysqli_query($conn, "UPDATE tb_matrik set nilai ='$row_sum[skor]' where id_siswa = '$_POST[id_siswa]' and id_kriteria = '$_POST[raport]'");
-        echo "<script>alert('Berhasil Mengubah Data'); window.location.href='../adminweb/index.php?page=raport'; </script>";
+        if ($edit = mysqli_query($conn, "UPDATE tb_matrik set nilai ='$row_sum[skor]' where id_siswa = '$_POST[id_siswa]' and id_kriteria = '$_POST[raport]'")) {
+            echo "<script>alert('Berhasil Mengubah Data'); window.location.href='../adminweb/index.php?page=raport'; </script>";
+        } else {
+            echo "<script>alert('Gagal Mengubah Data'); window.location.href='../adminweb/index.php?page=raport'; </script>";
+        }
     } else {
-        $add = mysqli_query($conn, "INSERT INTO tb_matrik (id_kriteria,id_siswa,nilai) values('$_POST[raport]','$_POST[id_siswa]','$row_sum[skor]')");
-        echo "<script>alert('Berhasil Menambah Data'); window.location.href='../adminweb/index.php?page=raport'; </script>";
+        if ($add = mysqli_query($conn, "INSERT INTO tb_matrik (id_kriteria,id_siswa,nilai) values('$_POST[raport]','$_POST[id_siswa]','$row_sum[skor]')")) {
+            echo "<script>alert('Berhasil Menambah Data'); window.location.href='../adminweb/index.php?page=raport'; </script>";
+        } else {
+            echo "<script>alert('Gagal Menambah Data'); window.location.href='../adminweb/index.php?page=raport'; </script>";
+        }
     }
 } elseif ($modul == 'nilai' && $ac == 'input') {
 
     $query = mysqli_query($conn, "SELECT * FROM tb_kriteria where nama_kriteria not like '%raport%'");
+
     while ($row = mysqli_fetch_array($query)) {
         $kriteria = $_POST['nilai'][$row['id']];
         $id_kriteria = $row['id'];
-        $cek = mysqli_num_rows(mysqli_query($conn, "SELECT * FROM tb_matrik where id_siswa = '$_POST[id_siswa]' and id_kriteria ='$id_kriteria'"));
+
+        $cek = mysqli_num_rows(mysqli_query($conn, "SELECT * FROM tb_matrik where id_siswa = '$_POST[id_siswa]' 
+        and id_kriteria ='$id_kriteria'"));
         if ($cek > 0) {
-            $update = mysqli_query($conn, "UPDATE tb_matrik set nilai='$kriteria' where id_siswa='$_POST[id_siswa]' and id_kriteria ='$id_kriteria'");
-            echo "<script>alert('Berhasil Mengubah Data'); window.location.href='../adminweb/index.php?page=nilai'; </script>";
+            if ($update = mysqli_query($conn, "UPDATE tb_matrik set nilai='$kriteria' where id_siswa='$_POST[id_siswa]' and id_kriteria ='$id_kriteria'")) {
+                echo "<script>alert('Berhasil Mengubah Data'); window.location.href='../adminweb/index.php?page=nilai'; </script>";
+            } else {
+                echo "<script>alert('Gagal Mengubah Data'); window.location.href='../adminweb/index.php?page=nilai'; </script>";
+            }
         } else {
-            $insert = mysqli_query($conn, "INSERT INTO tb_matrik (id_siswa,id_kriteria,nilai)values ('$_POST[id_siswa]','$id_kriteria','$kriteria')");
-            echo "<script>alert('Berhasil Menambah Data'); window.location.href='../adminweb/index.php?page=nilai'; </script>";
+            if ($insert = mysqli_query($conn, "INSERT INTO tb_matrik (id_siswa,id_kriteria,nilai)values ('$_POST[id_siswa]','$id_kriteria','$kriteria')")) {
+                echo "<script>alert('Berhasil Menambah Data'); window.location.href='../adminweb/index.php?page=nilai'; </script>";
+            } else {
+                echo "<script>alert('Gagal Menambah Data'); window.location.href='../adminweb/index.php?page=nilai'; </script>";
+            }
         }
     }
 }

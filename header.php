@@ -28,7 +28,14 @@ TemplateMo 563 SEO Dream
 https://templatemo.com/tm-563-seo-dream
 
 -->
-
+    <style>
+        .header-area {
+            background-image: url(asset/img/atas.png);
+            background-size: cover;
+            /* background-repeat: no-repeat; */
+            /* margin-bottom: 30px; */
+        }
+    </style>
 </head>
 
 <body>
@@ -53,7 +60,7 @@ https://templatemo.com/tm-563-seo-dream
                 <div class="col-12">
                     <nav class="main-nav">
                         <!-- ***** Logo Start ***** -->
-                        <a href="index.html" class="logo">
+                        <a href="index.php" class="logo">
                             <h4>SDN UTAN KAYU 01 PAGI</h4>
                             <!-- <img src="home/assets/images/sd.jpg" alt=""></h4> -->
                         </a>

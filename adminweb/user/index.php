@@ -13,7 +13,7 @@
                     <div class="card-header" style="padding-bottom: 20px">
                         <div>
                             <?php if ($_SESSION['level'] == 'admin') : ?>
-                                <a href="index.php?page=tambah_kriteria" class="btn btn-sm btn-success" style="float: right;"><i class="fa fa-plus"></i> Tambah
+                                <a href="index.php?page=user_tambah" class="btn btn-sm btn-success" style="float: right;"><i class="fa fa-plus"></i> Tambah
                                 </a>
                             <?php endif ?>
                         </div>
@@ -28,7 +28,7 @@
                                         <th>Username</th>
                                         <th>Nama</th>
                                         <th>Level</th>
-                                        <th colspan="2">Level</th>
+                                        <th colspan="2" style="text-align:center;">Level</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -43,7 +43,7 @@
                                                 <td><?php echo $row['nama']; ?></td>
                                                 <td><?php echo $row['level']; ?></td>
                                                 <td><a href="index.php?page=user_ubah&id=<?php echo $row['id'] ?>" class="btn btn-xs btn-warning btn-block" title="Ubah">
-                                                        <i class="fas fa-pencil"></i>
+                                                        <i class="fas fa-edit"></i>
                                                     </a></td>
                                                 <td>
                                                     <a href="../proses/proseshapus.php?module=user&act=hapus&id=<?php echo $row['id'] ?>" class="btn btn-xs btn-danger btn-block" title="Hapus" onclick="return confirm('Apakah anda yakin ingin menghapus data kriteria <?php echo $row['nama'] ?>?')">
@@ -63,7 +63,7 @@
                                             <td><?php echo $row_guru['nama_guru'] ?></td>
                                             <td><?php echo 'guru' ?></td>
                                             <td><a href="index.php?page=user_ubah&id_guru=<?php echo $row_guru['id_guru'] ?>" class="btn btn-xs btn-warning btn-block" title="Ubah">
-                                                    <i class="fas fa-pencil"></i>
+                                                    <i class="fas fa-edit"></i>
                                                 </a></td>
                                             <td>
                                                 <a href="../proses/proseshapus.php?module=user&act=hapus&id_guru=<?php echo $row_guru['id_guru'] ?>" class="btn btn-xs btn-danger btn-block" title="Hapus" onclick="return confirm('Apakah anda yakin ingin menghapus data kriteria <?php echo $row_guru['nama_guru'] ?>?')">

@@ -28,7 +28,7 @@
                                         <th>Bobot</th>
                                         <th>Jenis</th>
                                         <!-- <th>SubKriteria (Bobot)</th> -->
-                                        <th>Aksi</th>
+                                        <th colspan="2" style="text-align:center;">Aksi</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -40,31 +40,19 @@
                                                 <td><?php echo $row['nama_kriteria']; ?></td>
                                                 <td><?php echo $row['bobot']; ?></td>
                                                 <td><?php echo $row['sifat']; ?></td>
-                                                <!-- <td>
-                                                    <?php foreach ($data as $data_sub) : ?>
-                                                        <?php if ($data_sub['nama_subkriteria'] != 'input') : ?>
-                                                            <?php echo $data_sub['nama_subkriteria'] . ' (' . $data_sub['bobot_subkriteria'] . ')'; ?>
-                                                        <?php else : ?>
-                                                            -
-                                                        <?php endif ?>
-                                                        <br>
-                                                    <?php endforeach; ?>
-                                                </td> -->
-
-                                                <td align="center">
-                                                    <a href="index.php?url=data_kriteria_lihat&id=<?php echo $data[0]['id'] ?>" class="btn btn-xs btn-info" title="Lihat">
-                                                        <i class="fa fa-eye"></i>
-                                                    </a>
+                                                
                                                     <?php if ($_SESSION['level'] == 'admin') : ?>
-
-                                                        <a href="index.php?page=ubah_kriteria&id=<?php echo $row['id'] ?>" class="btn btn-xs btn-warning" title="Ubah">
-                                                            <i class="fas fa-pencil"></i>
+                                                    <td>
+                                                        <a href="index.php?page=ubah_kriteria&id=<?php echo $row['id'] ?>" class="btn btn-xs btn-warning btn-block" title="Ubah">
+                                                            <i class="fas fa-edit"></i>
                                                         </a>
-                                                        <a href="../proses/proseshapus.php?module=kriteria&act=hapus&id=<?php echo $row['id'] ?>" class="btn btn-xs btn-danger" title="Hapus" onclick="return confirm('Apakah anda yakin ingin menghapus data kriteria <?php echo $row['nama_kriteria'] ?>?')">
+                                                        </td>
+                                                        <td>
+                                                        <a href="../proses/proseshapus.php?module=kriteria&act=hapus&id=<?php echo $row['id'] ?>" class="btn btn-block btn-xs btn-danger" title="Hapus" onclick="return confirm('Apakah anda yakin ingin menghapus data kriteria <?php echo $row['nama_kriteria'] ?>?')">
                                                             <i class="fas fa-times"></i>
                                                         </a>
+                                                        </td>
                                                     <?php endif ?>
-                                                </td>
                                             </tr>
                                         <?php endif; ?>
                                     <?php endwhile; ?>

@@ -52,7 +52,10 @@
                             </a>
                 </li>
                 <li class="nav-item">
-                    <?php if (($pecah == 'user') || ($pecah == 'kriteria') || ($pecah == 'siswa') || ($pecah == 'guru') || ($pecah == 'kelas') || ($pecah == 'lowongan')) { ?>
+                    <?php if (($pecah == 'user') || ($pecah == 'user_tambah') || ($pecah == 'user_ubah') ||
+                        ($pecah == 'siswa') || ($pecah == 'guru') || ($pecah == 'kelas') || ($pecah == 'kriteria') ||
+                        ($pecah == 'tambah_kriteria') || ($pecah == 'ubah_kriteria')
+                    ) { ?>
                         <a href="#" class="nav-link active">
                             <i class="nav-icon fas fa-chart-pie"></i>
                             <p>
@@ -74,7 +77,7 @@
                             <?php } ?>
                             <?php if ($_SESSION['level'] == 'admin') : ?>
                                 <li class="nav-item">
-                                    <?php if ($pecah == 'user') {
+                                    <?php if (($pecah == 'user') || ($pecah == 'user_tambah') || ($pecah == 'user_ubah')) {
                                     ?>
                                         <a href="index.php?page=user" class="nav-link active">
                                         <?php } else { ?>
@@ -113,7 +116,7 @@
                                             </a>
                                 </li>
                                 <li class="nav-item">
-                                    <?php if ($pecah == 'kriteria') {
+                                    <?php if (($pecah == 'kriteria') || ($pecah == 'tambah_kriteria') || ($pecah == 'ubah_kriteria')) {
                                     ?>
                                         <a href="index.php?page=kriteria" class="nav-link active">
                                         <?php } else { ?>
@@ -155,7 +158,9 @@
                             </a>
                 </li> -->
                 <li class="nav-item">
-                    <?php if (($pecah == 'raport') || ($pecah == 'nilai') || ($pecah == 'hasil')) { ?>
+                    <?php if (($pecah == 'raport') || ($pecah == 'ubah_raport') || ($pecah == 'tambah_raport') ||
+                        ($pecah == 'nilai') || ($pecah == 'ubah_nilai') || ($pecah == 'tambah_nilai') || ($pecah == 'hasil')
+                    ) { ?>
                         <a href="#" class="nav-link active">
                             <i class="nav-icon fas fa-calculator"></i>
                             <p>
@@ -175,7 +180,7 @@
                             <ul class="nav nav-treeview" style="display: none;">
                             <?php } ?>
                             <li class="nav-item">
-                                <?php if ($pecah == 'raport') {
+                                <?php if (($pecah == 'raport') || ($pecah == 'ubah_raport') || ($pecah == 'tambah_raport')) {
                                 ?>
                                     <a href="index.php?page=raport" class="nav-link active">
                                     <?php } else { ?>
@@ -187,20 +192,21 @@
                                         </p>
                                         </a>
                             </li>
-                            <li class="nav-item">
-                                <?php if ($pecah == 'nilai') {
-                                ?>
-                                    <a href="index.php?page=nilai" class="nav-link active">
-                                    <?php } else { ?>
-                                        <a href="index.php?page=nilai" class="nav-link">
-                                        <?php } ?>
-                                        <i class="nav-icon far fa-circle nav-icon"></i>
-                                        <p>
-                                            Kriteria Penilaian
-                                        </p>
-                                        </a>
-                            </li>
                             <?php if ($_SESSION['level'] == 'guru') : ?>
+                                <li class="nav-item">
+                                    <?php if (($pecah == 'nilai') || ($pecah == 'ubah_nilai') || ($pecah == 'tambah_nilai')) {
+                                    ?>
+                                        <a href="index.php?page=nilai" class="nav-link active">
+                                        <?php } else { ?>
+                                            <a href="index.php?page=nilai" class="nav-link">
+                                            <?php } ?>
+                                            <i class="nav-icon far fa-circle nav-icon"></i>
+                                            <p>
+                                                Kriteria Penilaian
+                                            </p>
+                                            </a>
+                                </li>
+
                                 <li class="nav-item">
                                     <?php if ($pecah == 'hasil') {
                                     ?>

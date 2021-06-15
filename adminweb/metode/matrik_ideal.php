@@ -121,7 +121,7 @@
                 where tb_siswa.id_kelas = '$_SESSION[id_kelas]'
                 group by tb_siswa.id
                 order by tb_matrik.nilai desc 
-                limit 10");
+                limit 5");
                 $no = $posisi + 1;
                 while ($row = mysqli_fetch_array($tampil)) { ?>
                     <?php

@@ -10,6 +10,8 @@ if ($modul == 'kelas' && $ac == 'ubah') {
     if ($query = mysqli_query($conn, "UPDATE tb_kelas set nama_kelas = '$nama_kelas' 
     where id = '$id'")) {
         echo "<script>alert('Berhasil Mengubah Data'); window.location.href='../adminweb/index.php?page=kelas'; </script>";
+    } else {
+        echo "<script>alert('Gagal Mengubah Data'); window.location.href='../adminweb/index.php?page=kelas'; </script>";
     }
 } elseif ($modul == 'guru' && $ac == 'ubah') {
     $id_kelas = $_POST['id_kelas'];
@@ -22,10 +24,12 @@ if ($modul == 'kelas' && $ac == 'ubah') {
     $no_telp = $_POST['no_telp'];
     $alamat = $_POST['alamat'];
     $id_guru = $_POST['id_guru'];
-    if ($query = mysqli_query($conn, "UPDATE tb_guru set id_kelas = '$id_kelas', nip = '$nip', nama = '$nama', tempat_lahir = '$tempat_lahir', 
-    tanggal_lahir = '$tanggal_lahir', jenis_kelamin = '$jenis_kelamin', agama = '$agama', no_telp = '$no_telp', 
-    alamat = '$alamat' where id = '$id_guru'")) {
+    if ($query = mysqli_query($conn, "UPDATE tb_guru set id_kelas = '$id_kelas', nip = '$nip', nama_guru = '$nama', 
+    tempat_lahir = '$tempat_lahir', tanggal_lahir = '$tanggal_lahir', jenis_kelamin = '$jenis_kelamin', 
+    agama = '$agama', no_telp = '$no_telp', alamat = '$alamat' where id_guru = '$id_guru'")) {
         echo "<script>alert('Berhasil Mengubah Data'); window.location.href='../adminweb/index.php?page=guru'; </script>";
+    } else {
+        echo "<script>alert('Gagal Mengubah Data'); window.location.href='../adminweb/index.php?page=guru'; </script>";
     }
 } elseif ($modul == 'siswa' && $ac == 'ubah') {
     $id_kelas = $_POST['id_kelas'];
@@ -42,6 +46,8 @@ if ($modul == 'kelas' && $ac == 'ubah') {
     tempat_lahir = '$tempat_lahir', tanggal_lahir = '$tanggal_lahir', jenis_kelamin = '$jenis_kelamin', 
     agama = '$agama', alamat = '$alamat' where id = '$id_siswa'")) {
         echo "<script>alert('Berhasil Mengubah Data'); window.location.href='../adminweb/index.php?page=siswa'; </script>";
+    } else {
+        echo "<script>alert('Gagal Mengubah Data'); window.location.href='../adminweb/index.php?page=siswa'; </script>";
     }
     // } elseif ($modul == 'user' && $ac == 'ubah') {
     //     $username = $_POST['username'];
@@ -68,6 +74,8 @@ if ($modul == 'kelas' && $ac == 'ubah') {
     if ($query = mysqli_query($conn, "UPDATE tb_kriteria set nama_kriteria = '$nama_kriteria', bobot = '$bobot', 
     sifat = '$sifat' where id = '$id'")) {
         echo "<script>alert('Berhasil Mengubah Data'); window.location.href='../adminweb/index.php?page=kriteria'; </script>";
+    } else {
+        echo "<script>alert('Gagal Mengubah Data'); window.location.href='../adminweb/index.php?page=kriteria'; </script>";
     }
 } elseif ($modul == 'user' && $ac == 'ubah') {
     if (isset($_POST['id'])) {
@@ -82,11 +90,28 @@ if ($modul == 'kelas' && $ac == 'ubah') {
         if ($query = mysqli_query($conn, "UPDATE tb_user set username = '$username', nama = '$nama', 
         password = '$password' where id = '$id'")) {
             echo "<script>alert('Berhasil Mengubsah Data'); window.location.href='../adminweb/index.php?page=user'; </script>";
+        } else {
+            echo "<script>alert('Gagal Mengubsah Data'); window.location.href='../adminweb/index.php?page=user'; </script>";
         }
     } else {
         if ($query = mysqli_query($conn, "UPDATE tb_guru set nip = '$username', password = '$password', nama_guru ='$nama' 
         where id_guru = '$id'")) {
             echo "<script>alert('Berhasil Mengubah Data'); window.location.href='../adminweb/index.php?page=user'; </script>";
+        } else {
+            echo "<script>alert('Gagal Mengubah Data'); window.location.href='../adminweb/index.php?page=user'; </script>";
         }
     }
-}
+} 
+// elseif ($modul == 'nilai' && $ac == 'ubah') {
+//     $id = $_POST['id'];
+//     $query = mysqli_query($conn, "SELECT * FROM tb_kriteria where id != '1'");
+//     while ($row = mysqli_fetch_array($query)) {
+//         $nilai = $_POST['nilai'][$row['id']];
+//         if (mysqli_query($conn, "UPDATE tb_matrik set nilai = '$nilai' 
+//         where id_siswa = '$id' and id_kriteria ='$row[id]'")) {
+//             echo "<script>alert('Berhasil Mengubsah Data'); window.location.href='../adminweb/index.php?page=nilai'; </script>";
+//         } else {
+//             echo "<script>alert('Gagal Mengubsah Data'); window.location.href='../adminweb/index.php?page=nilai'; </script>";
+//         }
+//     }
+// }

@@ -7,7 +7,9 @@
                 <div class="card">
                     <div class="card-header">
                         <h2 class="card-title">Data Siswa</h2>
-                        <a href="index.php?page=tambah_raport" class="btn btn-sm btn-primary float-right">Tambah Data</a>
+                        <?php if ($_SESSION['level'] == 'guru') : ?>
+                            <a href="index.php?page=tambah_raport" class="btn btn-sm btn-primary float-right">Tambah Data</a>
+                        <?php endif; ?>
                     </div>
                     <!-- /.card-header -->
                     <div class="card-body">
@@ -29,14 +31,16 @@
                                                     <th rowspan="1" colspan="1"><?php echo $row['nama_mapel'] ?></th>
                                                 <?php endwhile; ?>
                                                 <th rowspan="1" colspan="1">Rata-Rata</th>
-                                                <th colspan="2">
-                                                    <center>Aksi</center>
-                                                </th>
+                                                <?php if ($_SESSION['level'] == 'guru') : ?>
+                                                    <th colspan="2">
+                                                        <center>Aksi</center>
+                                                    </th>
+                                                <?php endif; ?>
                                             </tr>
                                         </thead>
                                         <tbody>
                                             <?php
-                                            $p      = new PagingKriteria();
+                                            $p      = new PagingRaport();
                                             $batas  = 5;
                                             $posisi = $p->cariPosisi($batas);
                                             if (isset($_GET['kelas'])) {
@@ -81,15 +85,43 @@
                                                         <?php endwhile; ?>
                                                     <?php endwhile; ?>
                                                     <td><?php echo round($row['skor'], 2); ?></td>
-                                                    <td><a href="index.php?page=ubah_raport&id=<?php echo $row['id_siswa']; ?>" class="btn btn-sm btn-warning btn-block">Ubah</a></td>
-                                                    <td><a href="../proses/proseshapus.php?module=raport&act=hapus&id=<?php echo $row['id_siswa'] ?>" class="btn btn-sm btn-danger btn-block" title="Hapus" onclick="return confirm('Apakah anda yakin ingin menghapus data raport <?php echo $row['nama'] ?>?')">Hapus</a></td>
-
+                                                    <?php if ($_SESSION['level'] == 'guru') : ?>
+                                                        <td><a href="index.php?page=ubah_raport&id=<?php echo $row['id_siswa']; ?>" class="btn btn-sm btn-warning btn-block"><i class="fas fa-edit"></i></a></td>
+                                                        <td><a href="../proses/proseshapus.php?module=raport&act=hapus&id=<?php echo $row['id_siswa'] ?>" class="btn btn-sm btn-danger btn-block" title="Hapus" onclick="return confirm('Apakah anda yakin ingin menghapus data raport <?php echo $row['nama'] ?>?')"><i class="fas fa-times"></i></a></td>
+                                                    <?php endif; ?>
                                                 </tr>
 
                                             <?php
                                                 $no++;
                                             }
-                                            $jmldata = mysqli_num_rows(mysqli_query($conn, "SELECT * FROM tb_siswa"));
+                                            if (isset($_GET['kelas'])) {
+                                                $dats = mysqli_query($conn, "SELECT *,tb_matrik.nilai as skor FROM tb_raport 
+                                            left join tb_siswa on tb_siswa.id = tb_raport.id_siswa
+                                            left join tb_matrik on tb_matrik.id_siswa = tb_raport.id_siswa
+                                            join tb_guru on tb_siswa.id_kelas = tb_guru.id_kelas
+                                            where tb_siswa.id_kelas = '$_GET[kelas]'
+                                            group by tb_raport.id_siswa
+                                            order by tb_raport.id_siswa asc 
+                                           ");
+                                            } else if ($_SESSION['level'] == 'guru') {
+                                                $dats = mysqli_query($conn, "SELECT *,tb_matrik.nilai as skor FROM tb_raport 
+                                            left join tb_siswa on tb_siswa.id = tb_raport.id_siswa
+                                            left join tb_matrik on tb_matrik.id_siswa = tb_raport.id_siswa
+                                            join tb_guru on tb_siswa.id_kelas = tb_guru.id_kelas
+                                            where tb_siswa.id_kelas = '$_SESSION[id_kelas]'
+                                            group by tb_raport.id_siswa
+                                            order by tb_raport.id_siswa asc 
+                                           ");
+                                            } else {
+                                                $dats = mysqli_query($conn, "SELECT *,tb_matrik.nilai as skor FROM tb_raport 
+                                            left join tb_siswa on tb_siswa.id = tb_raport.id_siswa
+                                            left join tb_matrik on tb_matrik.id_siswa = tb_raport.id_siswa
+                                            join tb_guru on tb_siswa.id_kelas = tb_guru.id_kelas
+                                            group by tb_raport.id_siswa
+                                            order by tb_raport.id_siswa asc 
+                                           ");
+                                            }
+                                            $jmldata = mysqli_num_rows($dats);
                                             $jmlhalaman  = $p->jumlahHalaman($jmldata, $batas);
                                             $linkHalaman = $p->navHalaman($_GET['halaman'], $jmlhalaman);
                                             ?>
@@ -99,15 +131,17 @@
                                                 <th rowspan="1" colspan="1">No.</th>
                                                 <th rowspan="1" colspan="1">NIS</th>
                                                 <th rowspan="1" colspan="1">Nama</th>
+
                                                 <?php $query = mysqli_query($conn, "SELECT * FROM tb_mapel");
                                                 while ($row = mysqli_fetch_array($query)) : ?>
                                                     <th rowspan="1" colspan="1"><?php echo $row['nama_mapel'] ?></th>
                                                 <?php endwhile; ?>
                                                 <th class="sorting " tabindex="0" aria-controls="example2" rowspan="1" colspan="1">Rata-Rata</th>
-
-                                                <th rowspan="1" colspan="2">
-                                                    <center>Aksi</center>
-                                                </th>
+                                                <?php if ($_SESSION['level'] == 'guru') : ?>
+                                                    <th rowspan="1" colspan="2">
+                                                        <center>Aksi</center>
+                                                    </th>
+                                                <?php endif; ?>
                                             </tr>
                                         </tfoot>
                                     </table>

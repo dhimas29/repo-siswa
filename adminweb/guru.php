@@ -37,7 +37,7 @@
                                         </thead>
                                         <tbody>
                                             <?php
-                                            $p      = new PagingKriteria();
+                                            $p      = new PagingGuru();
                                             $batas  = 5;
                                             $posisi = $p->cariPosisi($batas);
                                             $tampil = mysqli_query($conn, "SELECT * FROM tb_guru left join tb_kelas on tb_kelas.id = tb_guru.id_kelas
@@ -54,8 +54,8 @@
                                                     <td><?php echo $row['no_telp']; ?></td>
                                                     <td><?php echo $row['alamat']; ?></td>
                                                     <td><?php echo $row['nama_kelas']; ?></td>
-                                                    <td><a href="" data-bs-toggle="modal" data-bs-target="#modalubah<?= $row['id_guru']; ?>" class="btn btn-sm btn-warning btn-block">Ubah</a></td>
-                                                    <td><a href="" data-bs-toggle="modal" data-bs-target="#modalhapus<?= $row['id_guru']; ?>" class="btn btn-sm btn-danger btn-block">Hapus</a></td>
+                                                    <td><a href="" data-bs-toggle="modal" data-bs-target="#modalubah<?= $row['id_guru']; ?>" class="btn btn-sm btn-warning btn-block"><i class="fas fa-edit"></i></a></td>
+                                                    <td><a href="" data-bs-toggle="modal" data-bs-target="#modalhapus<?= $row['id_guru']; ?>" class="btn btn-sm btn-danger btn-block"><i class="fas fa-times"></i></a></td>
                                                 </tr>
                                                 <!-- Modal Haus -->
                                                 <div class="modal fade" id="modalhapus<?= $row['id_guru'] ?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -63,7 +63,7 @@
                                                         <div class="modal-content">
                                                             <div class="modal-header">
                                                                 <?php
-                                                                $querys = mysqli_query($conn, "SELECT * FROM tb_guru where id='$row[id_guru]'");
+                                                                $querys = mysqli_query($conn, "SELECT * FROM tb_guru where id_guru='$row[id_guru]'");
                                                                 while ($rows = mysqli_fetch_array($querys)) {
                                                                 ?>
                                                                     <h5 class="modal-title" id="exampleModalLabel">Yakin ingin menghapus data <?= $rows['nip']  ?></h5>
@@ -71,7 +71,7 @@
                                                             </div>
                                                             <div class="modal-footer">
                                                                 <form method="POST" action="../proses/proseshapus.php?module=guru&act=hapus" onSubmit="return validasi(this)">
-                                                                    <input type="hidden" name="id_guru" value="<?php echo $rows['id'] ?>">
+                                                                    <input type="hidden" name="id_guru" value="<?php echo $rows['id_guru'] ?>">
                                                                     <button type="submit" class="btn btn-danger">Yes</button>
                                                                     <button type="button" class="btn btn-primary" data-bs-dismiss="modal">No</button>
                                                                 </form>
@@ -92,9 +92,9 @@
                                                             <div class="modal-body">
                                                                 <form class="form-horizontal" method="POST" action="../proses/prosesubah.php?module=guru&act=ubah" onSubmit="return validasi(this)">
                                                                     <?php
-                                                                    $querys = mysqli_query($conn, "SELECT *,tb_guru.id as id_guru FROM tb_guru 
+                                                                    $querys = mysqli_query($conn, "SELECT *,tb_guru.id_guru as id_guru FROM tb_guru 
                                                                     left join tb_kelas on tb_kelas.id = tb_guru.id_kelas 
-                                                                    where tb_guru.id='$row[id_guru]'");
+                                                                    where tb_guru.id_guru='$row[id_guru]'");
                                                                     while ($rows = mysqli_fetch_array($querys)) {
                                                                     ?>
                                                                         <input type="hidden" value="<?php echo $rows['id_guru']; ?>" name="id_guru">

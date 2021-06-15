@@ -73,6 +73,9 @@
             case 'user':
                 include 'user/index.php';
                 break;
+            case 'user_tambah':
+                include 'user/tambah.php';
+                break;
             case 'user_ubah':
                 include 'user/ubah.php';
                 break;
@@ -108,6 +111,9 @@
                 break;
             case 'nilai':
                 include 'nilai/index.php';
+                break;
+            case 'ubah_nilai':
+                include 'nilai/ubah.php';
                 break;
             case 'tambah_nilai':
                 include 'nilai/tambah.php';

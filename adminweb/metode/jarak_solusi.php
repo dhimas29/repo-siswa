@@ -25,24 +25,24 @@
                 where tb_siswa.id_kelas = '$_SESSION[id_kelas]'
                 group by tb_siswa.id
                 order by tb_matrik.nilai desc 
-                limit 10");
+                limit 5");
                 $no = 1;
+                $mak2 = 0;
                 while ($row = mysqli_fetch_array($tampil)) { ?>
                     <tr>
                         <td><?php echo $no ?></td>
                         <td><?php echo $row['nis'] ?></td>
                         <td><?php echo $row['nama'] ?></td>
                         <?php
-                        $mak2 = 0;
-                        $data = mysqli_query($conn, "SELECT *,max(bobot_matrik) as skor_max,min(bobot_matrik) as skor_min 
-                        from tb_matrik
+                        $data = mysqli_query($conn, "SELECT *,max(bobot_matrik) as skor_max,
+                        min(bobot_matrik) as skor_min from tb_matrik
                         join tb_kriteria on tb_kriteria.id = tb_matrik.id_kriteria
-                        group by id_kriteria");
+                        group by tb_matrik.id_kriteria");
                         while ($row = mysqli_fetch_array($data)) {
                             if ($row['sifat'] == 'Benefit') {
-                                sqrt($mak2 = $mak2 + pow($row['bobot_matrik'] - $row['skor_max'], 2));
+                                sqrt($mak2 = $mak2 + pow(($row['bobot_matrik'] - $row['skor_max']), 2));
                             } else {
-                                sqrt($mak2 = $mak2 + pow($row['bobot_matrik'] - $row['skor_min'], 2));
+                                sqrt($mak2 = $mak2 + pow(($row['bobot_matrik'] - $row['skor_min']), 2));
                             }
                         }
                         ?>
@@ -90,8 +90,8 @@
                 where tb_siswa.id_kelas = '$_SESSION[id_kelas]'
                 group by tb_siswa.id
                 order by tb_matrik.nilai desc 
-                limit 10");
-                $mak2 = 0;
+                limit 5");
+                $min2 = 0;
                 $no = 1;
                 while ($row = mysqli_fetch_array($tampil)) { ?>
                     <tr>
@@ -105,13 +105,13 @@
                         group by id_kriteria");
                         while ($row = mysqli_fetch_array($data)) {
                             if ($row['sifat'] == 'Cost') {
-                                sqrt($mak2 = $mak2 + pow($row['bobot_matrik'] - $row['skor_max'], 2));
+                                sqrt($min2 = $min2 + pow(($row['bobot_matrik'] - $row['skor_max']), 2));
                             } else {
-                                sqrt($mak2 = $mak2 + pow($row['bobot_matrik'] - $row['skor_min'], 2));
+                                sqrt($min2 = $min2 + pow(($row['bobot_matrik'] - $row['skor_min']), 2));
                             }
                         }
                         ?>
-                        <td><?php echo round($mak2, 3); ?></td>
+                        <td><?php echo round($min2, 3); ?></td>
                     </tr>
 
                 <?php
