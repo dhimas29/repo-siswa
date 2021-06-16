@@ -1,36 +1,16 @@
 <?php include('header.php') ?>
-<div class="main-banner wow fadeIn" id="top" data-wow-duration="1s" data-wow-delay="0.5s">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-12">
-                <div class="row">
-                    <div class="col-lg-6 align-self-center">
-                        <div class="left-content header-text wow fadeInLeft" data-wow-duration="1s" data-wow-delay="1s">
-                            <div class="row">
-                                <div class="col-lg-12">
-                                    <h2>Mari Tersesat Bersama</h2>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-6">
-                        <div class="right-image wow fadeInRight" data-wow-duration="1s" data-wow-delay="0.5s">
-                            <img src="home/assets/images/gambar4.jpg" alt="">
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+<!-- <div class="main-banner wow fadeIn" id="top" data-wow-duration="1s" data-wow-delay="0.5s">
+</div> -->
+<div id="home">
+    <img src="asset/img/sekolah.png" style="background-size: cover;">
 </div>
-
 
 <div id="about" class="about-us section">
     <div class="container">
         <div class="row">
             <div class="col-lg-6">
                 <div class="left-image wow fadeInLeft" data-wow-duration="1s" data-wow-delay="0.5s">
-                    <img src="home/assets/images/sd.jpg" alt="">
+                    <img src="asset/img/logo_sd.png" alt="">
                 </div>
             </div>
             <div class="col-lg-6 align-self-center wow fadeInRight" data-wow-duration="1s" data-wow-delay="0.5s">

@@ -371,7 +371,7 @@ class PagingRaport
         // Link halaman 1,2,3, ...
         for ($i = 1; $i <= $jmlhalaman; $i++) {
             if ($i == $halaman_aktif) {
-                $link_halaman .= "<li class='active'><a href='$_SERVER[PHP_SELF]?page=raport='>$i</a></li>  ";
+                $link_halaman .= "<li class='active'><a href='$_SERVER[PHP_SELF]?page=raport'>$i</a></li>  ";
             } else {
                 $link_halaman .= "<li><a href='$_SERVER[PHP_SELF]?page=raport&halaman=$i'>$i</a> </li>";
             }

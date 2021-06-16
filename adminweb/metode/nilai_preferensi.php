@@ -67,6 +67,7 @@ while ($row = mysqli_fetch_array($tampil)) {
                 $tampils = mysqli_query($conn, "SELECT * from tb_preferensi 
                 join tb_siswa on tb_siswa.id = tb_preferensi.id_siswa
                 join tb_guru on tb_siswa.id_kelas = tb_guru.id_kelas
+                where tb_siswa.id_kelas = '$_SESSION[id_kelas]'
                 order by nilai desc
                 limit 2");
                 $no = 1;

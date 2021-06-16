@@ -46,11 +46,12 @@
                                                 $tampil = mysqli_query($conn, "SELECT *,tb_siswa.id as id_siswa FROM tb_siswa 
                                                    left join tb_kelas on tb_kelas.id = tb_siswa.id_kelas
                                                     where tb_siswa.id_kelas = '$_SESSION[id_kelas]'
+                                                    group by id_siswa
                                                     order by id_siswa asc limit $posisi,$batas");
                                             } else {
                                                 $tampil = mysqli_query($conn, "SELECT *,tb_siswa.id as id_siswa FROM tb_siswa 
-                                            join tb_guru on tb_guru.id_kelas = tb_siswa.id_kelas
-                                            left join tb_kelas on tb_kelas.id = tb_guru.id_kelas
+                                            left join tb_kelas on tb_kelas.id = tb_siswa.id_kelas
+                                            group by id_siswa
                                             order by id_siswa asc limit $posisi,$batas");
                                             }
                                             $no = $posisi + 1;

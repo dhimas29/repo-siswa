@@ -53,7 +53,7 @@
     </div> -->
 </div>
 <div class="row form-group">
-    <?php $query = mysqli_query($conn, "SELECT * FROM tb_kriteria where nama_kriteria not like '%raport%' and nama_kriteria not like '%mata pelajaran%'");
+    <?php $query = mysqli_query($conn, "SELECT * FROM tb_kriteria where nama_kriteria not like '%raport%'");
     while ($row = mysqli_fetch_array($query)) : ?>
         <div class="col-lg-3">
             <label><?= $row['nama_kriteria'] ?></label>

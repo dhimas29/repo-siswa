@@ -35,6 +35,11 @@ https://templatemo.com/tm-563-seo-dream
             /* background-repeat: no-repeat; */
             /* margin-bottom: 30px; */
         }
+
+        .main-banner {
+            background-image: url(asset/img/sekolah.jpg);
+            /* background-size: cover; */
+        }
     </style>
 </head>
 
@@ -61,8 +66,7 @@ https://templatemo.com/tm-563-seo-dream
                     <nav class="main-nav">
                         <!-- ***** Logo Start ***** -->
                         <a href="index.php" class="logo">
-                            <h4>SDN UTAN KAYU 01 PAGI</h4>
-                            <!-- <img src="home/assets/images/sd.jpg" alt=""></h4> -->
+                            <h4>SDN UTAN KAYU 01 PAGI <img src="asset/img/logo_sd.png" style="margin-top: auto;margin-bottom: auto;" alt=""></h4>
                         </a>
                         <!-- ***** Logo End ***** -->
                         <!-- ***** Menu Start ***** -->
