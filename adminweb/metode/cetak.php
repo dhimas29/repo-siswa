@@ -17,7 +17,7 @@ class PDF extends FPDF
         // $this->Cell(60);
         // Title
         $this->Cell(260, 8, 'Laporan Lomba Siswa', 0, 1, 'C');
-        $this->Cell(260, 8, 'SDN UTAN 01', 0, 1, 'C');
+        $this->Cell(260, 8, 'SDN UTAN KAYU 01 PAGI', 0, 1, 'C');
         $this->SetFont('Times', 'B', 12);
         $this->Cell(260, 8, 'Jl. Pandan Raya No. I', 0, 1, 'C');
         // Line break
