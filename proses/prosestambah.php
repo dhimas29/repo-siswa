@@ -97,7 +97,20 @@ if ($modul == 'kelas' && $ac == 'input') {
     }
 } elseif ($modul == 'nilai' && $ac == 'input') {
 
-    $query = mysqli_query($conn, "SELECT * FROM tb_kriteria where nama_kriteria not like '%raport%'");
+    $query = mysqli_query($conn, "SELECT * FROM tb_kriteria where nama_kriteria like '%pengalaman lomba%'");
+    while ($row = mysqli_fetch_array($query)) {
+        $id_kriteria = $row['id'];
+        if ($update = mysqli_query($conn, "UPDATE tb_matrik set nilai='$_POST[lomba]' where id_siswa='$_POST[id_siswa]' and id_kriteria ='$id_kriteria'")) {
+            echo "<script>alert('Berhasil Mengubah Data'); window.location.href='../adminweb/index.php?page=nilai'; </script>";
+        } elseif ($insert = mysqli_query($conn, "INSERT INTO tb_matrik (id_siswa,id_kriteria,nilai)values ('$_POST[id_siswa]','$id_kriteria','$_POST[lomba]')")) {
+            echo "<script>alert('Berhasil Menambah Data'); window.location.href='../adminweb/index.php?page=nilai'; </script>";
+        } else {
+            echo "<script>alert('Gagal Mengubah Data'); window.location.href='../adminweb/index.php?page=nilai'; </script>";
+        }
+    }
+
+    $query = mysqli_query($conn, "SELECT * FROM tb_kriteria where nama_kriteria not like '%raport%' and nama_kriteria not like '%lomba%'");
+
 
     while ($row = mysqli_fetch_array($query)) {
         $kriteria = $_POST['nilai'][$row['id']];

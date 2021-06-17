@@ -37,6 +37,8 @@
                         $data = mysqli_query($conn, "SELECT *,max(bobot_matrik) as skor_max,
                         min(bobot_matrik) as skor_min from tb_matrik
                         join tb_kriteria on tb_kriteria.id = tb_matrik.id_kriteria
+                        join tb_siswa on tb_siswa.id = tb_matrik.id_siswa
+                        where tb_siswa.id_kelas = '$_SESSION[id_kelas]'
                         group by tb_matrik.id_kriteria");
                         while ($row = mysqli_fetch_array($data)) {
                             if ($row['sifat'] == 'Benefit') {
@@ -102,6 +104,8 @@
                         $data = mysqli_query($conn, "SELECT *,max(bobot_matrik) as skor_max,min(bobot_matrik) as skor_min 
                         from tb_matrik
                         join tb_kriteria on tb_kriteria.id = tb_matrik.id_kriteria
+                        join tb_siswa on tb_siswa.id = tb_matrik.id_siswa
+                        where tb_siswa.id_kelas = '$_SESSION[id_kelas]'
                         group by id_kriteria");
                         while ($row = mysqli_fetch_array($data)) {
                             if ($row['sifat'] == 'Cost') {

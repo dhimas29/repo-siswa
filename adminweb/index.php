@@ -70,6 +70,9 @@
             case 'dashboard':
                 include 'dashboard.php';
                 break;
+            case 'cetak':
+                include 'metode/cetak.php';
+                break;
             case 'user':
                 include 'user/index.php';
                 break;

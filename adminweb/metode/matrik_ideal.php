@@ -35,6 +35,7 @@
                 left join tb_siswa on tb_siswa.id = tb_raport.id_siswa
                 left join tb_matrik on tb_matrik.id_siswa = tb_raport.id_siswa
                 join tb_guru on tb_siswa.id_kelas = tb_guru.id_kelas
+                where tb_siswa.id_kelas = '$_SESSION[id_kelas]'
                 group by tb_siswa.id");
                 $no = $posisi + 1;
                 while ($row = mysqli_fetch_array($tampil)) { ?>
@@ -42,10 +43,17 @@
                     $nilai_kuadrat = 0;
                     $query = mysqli_query($conn, "SELECT * FROM tb_kriteria");
                     while ($nilai = mysqli_fetch_array($query)) : ?>
-                        <?php $quer = mysqli_query($conn, "SELECT * FROM tb_matrik where id_kriteria ='$nilai[id]' and id_siswa ='$row[id_siswa]' group by id order by id_kriteria asc");
+                        <?php $quer = mysqli_query($conn, "SELECT * FROM tb_matrik 
+                        join tb_siswa on tb_siswa.id = tb_matrik.id_siswa
+                        where tb_siswa.id_kelas = '$_SESSION[id_kelas]'
+                        and id_kriteria ='$nilai[id]' and id_siswa ='$row[id_siswa]' 
+                        group by id_kriteria order by id_kriteria asc");
                         $ymax = [];
                         while ($nilaicek = mysqli_fetch_array($quer)) : ?>
-                            <?php $nilaim = mysqli_query($conn, "SELECT * FROM tb_matrik where id_kriteria = '$nilai[id]' order by id_kriteria asc");
+                            <?php $nilaim = mysqli_query($conn, "SELECT * FROM tb_matrik 
+                            join tb_siswa on tb_siswa.id = tb_matrik.id_siswa
+                            where tb_siswa.id_kelas = '$_SESSION[id_kelas]'
+                            and id_kriteria = '$nilai[id]' order by id_kriteria asc");
                             $c = 0;
                             while ($nilaimatrik = mysqli_fetch_array($nilaim)) : ?>
                                 <?php $nilai_kuadrat = $nilai_kuadrat + ($nilaimatrik['nilai'] * $nilaimatrik['nilai']); ?>
@@ -69,6 +77,8 @@
                 <tr>
                     <?php $query = mysqli_query($conn, "SELECT max(bobot_matrik) as skor_max,min(bobot_matrik) as skor_min,tb_kriteria.sifat as sifat FROM tb_matrik 
                     join tb_kriteria on tb_kriteria.id = tb_matrik.id_kriteria
+                    join tb_siswa on tb_siswa.id = tb_matrik.id_siswa
+                    where tb_siswa.id_kelas = '$_SESSION[id_kelas]'
                     group by id_kriteria");
                     while ($row = mysqli_fetch_array($query)) {
                         if ($row['sifat'] == 'Benefit') {
@@ -128,10 +138,18 @@
                     $nilai_kuadrat = 0;
                     $query = mysqli_query($conn, "SELECT * FROM tb_kriteria");
                     while ($nilai = mysqli_fetch_array($query)) : ?>
-                        <?php $quer = mysqli_query($conn, "SELECT * FROM tb_matrik where id_kriteria ='$nilai[id]' and id_siswa ='$row[id_siswa]' group by id order by id_kriteria asc");
+                        <?php $quer = mysqli_query($conn, "SELECT * FROM tb_matrik 
+                        join tb_siswa on tb_siswa.id = tb_matrik.id_siswa
+                        where tb_siswa.id_kelas = '$_SESSION[id_kelas]'
+                        and id_kriteria ='$nilai[id]' and id_siswa ='$row[id_siswa]' 
+                        group by id_kriteria 
+                        order by id_kriteria asc");
                         $ymax = [];
                         while ($nilaicek = mysqli_fetch_array($quer)) : ?>
-                            <?php $nilaim = mysqli_query($conn, "SELECT * FROM tb_matrik where id_kriteria = '$nilai[id]' order by id_kriteria asc");
+                            <?php $nilaim = mysqli_query($conn, "SELECT * FROM tb_matrik 
+                            join tb_siswa on tb_siswa.id = tb_matrik.id_siswa
+                            where tb_siswa.id_kelas = '$_SESSION[id_kelas]'
+                            and id_kriteria = '$nilai[id]' order by id_kriteria asc");
                             $c = 0;
                             while ($nilaimatrik = mysqli_fetch_array($nilaim)) : ?>
                                 <?php $nilai_kuadrat = $nilai_kuadrat + ($nilaimatrik['nilai'] * $nilaimatrik['nilai']); ?>
@@ -155,6 +173,8 @@
                 <tr>
                     <?php $query = mysqli_query($conn, "SELECT max(bobot_matrik) as skor_max,min(bobot_matrik) as skor_min,tb_kriteria.sifat as sifat FROM tb_matrik 
                     join tb_kriteria on tb_kriteria.id = tb_matrik.id_kriteria
+                    join tb_siswa on tb_siswa.id = tb_matrik.id_siswa
+                    where tb_siswa.id_kelas = '$_SESSION[id_kelas]'
                     group by id_kriteria");
                     while ($row = mysqli_fetch_array($query)) {
                         if ($row['sifat'] == 'Cost') {

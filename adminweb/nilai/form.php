@@ -52,9 +52,41 @@
         </select>
     </div> -->
 </div>
-<div class="row form-group">
-    <?php $query = mysqli_query($conn, "SELECT * FROM tb_kriteria where nama_kriteria not like '%raport%'");
-    while ($row = mysqli_fetch_array($query)) : ?>
+<?php $query = mysqli_query($conn, "SELECT * FROM tb_kriteria where nama_kriteria like '%pengalaman lomba%'");
+while ($row = mysqli_fetch_array($query)) : ?>
+    <div class="row form-group">
+        <div class="col-lg-3">
+            <label><?= $row['nama_kriteria'] ?></label>
+        </div>
+        <?php
+        if (isset($_GET['id'])) {
+            $querys = mysqli_query($conn, "SELECT * FROM tb_matrik where id_siswa = '$_GET[id]' and id_kriteria = '$row[id]'");
+            $rows = mysqli_fetch_array($querys);
+        }
+        ?>
+        <div class="col-lg-3">
+            <select name="lomba" id="" required class="form-control">
+                <option value="">-- Pilih --</option>
+                <option value="0" <?php if (isset($rows)) {
+                                        if ($rows['nilai'] == '0') echo 'selected';
+                                    } ?>>Belum Pernah Ikut Lomba</option>
+                <option value="60" <?php if (isset($rows)) {
+                                        if ($rows['nilai'] == '60') echo 'selected';
+                                    } ?>>1-2 Kali</option>
+                <option value="80" <?php if (isset($rows)) {
+                                        if ($rows['nilai'] == '80') echo 'selected';
+                                    } ?>>3-4 Kali</option>
+                <option value="100" <?php if (isset($rows)) {
+                                        if ($rows['nilai'] == '100') echo 'selected';
+                                    } ?>>5 Kali atau lebih</option>
+            </select>
+            <!-- <input class="form-control" type="number" name="nilai[<?php echo $row['id'] ?>]" placeholder="0-100" required="" value="<?php if (isset($rows)) echo $rows['nilai']; ?>"> -->
+        </div>
+    </div>
+<?php endwhile; ?>
+<?php $query = mysqli_query($conn, "SELECT * FROM tb_kriteria where nama_kriteria not like '%raport%' and nama_kriteria not like '%pengalaman lomba%'");
+while ($row = mysqli_fetch_array($query)) : ?>
+    <div class="row form-group">
         <div class="col-lg-3">
             <label><?= $row['nama_kriteria'] ?></label>
         </div>
@@ -67,5 +99,5 @@
         <div class="col-lg-3">
             <input class="form-control" type="number" name="nilai[<?php echo $row['id'] ?>]" placeholder="0-100" required="" value="<?php if (isset($rows)) echo $rows['nilai']; ?>">
         </div>
-    <?php endwhile; ?>
-</div>
+    </div>
+<?php endwhile; ?>

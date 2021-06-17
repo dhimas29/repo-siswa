@@ -48,7 +48,7 @@ while ($row = mysqli_fetch_array($tampil)) {
 <div class="card-body">
     <div class="col-sm-12">
         <table id="example2" class="table table-bordered table-hover dataTable dtr-inline collapsed" role="grid" aria-describedby="example2_info">
-            <a href="" class="btn btn-primary btn-sm float-right">Cetak</a>
+            <a href="metode/cetak.php?id_kelas=<?php echo $_SESSION['id_kelas'] ?>" class="btn btn-primary btn-sm float-right">Cetak</a>
             <div class="table-header">Nilai Preferensi</div>
             <thead>
                 <tr role="row">
